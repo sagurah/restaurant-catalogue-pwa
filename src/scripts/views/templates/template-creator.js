@@ -2,7 +2,7 @@ import CONFIG from '../../globals/config';
 
 const createMovieDetailTemplate = (res) => `
   <h2 class="movie__title">${res.name}</h2>
-  <img class="movie__poster" src="${CONFIG.BASE_IMG_URL + res.pictureId}" alt="${res.name}" />
+  <img class="movie__poster" src="${CONFIG.BASE_IMG_URL + res.pictureId}" alt="${res.name}" crossorigin="anonymous"/>
   <div class="movie__info">
     <h3 style="background-color: #3c4238; color: #ffffff; padding: 0px 5px;">Informasi</h3>
     <h4>Nama Restoran</h4>
@@ -36,7 +36,7 @@ const createMovieDetailTemplate = (res) => `
 const createMovieItemTemplate = (res) => `
   <div class="movie-item">
     <div class="movie-item__header">
-      <img class="movie-item__header__poster" alt="${res.name}"
+      <img class="movie-item__header__poster" alt="${res.name}" crossorigin="anonymous"
            src="${res.pictureId ? CONFIG.BASE_IMG_URL + res.pictureId : 'https://picsum.photos/id/666/800/450?grayscale'}">
       <div class="movie-item__header__rating">
         <p>⭐️<span class="movie-item__header__rating__score">${res.rating}</span></p>

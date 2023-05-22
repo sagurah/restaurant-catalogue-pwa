@@ -232,6 +232,9 @@
    
   .movie-item .movie-item__content h3 a {
     color: #3c4238;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 10px 0;
     text-decoration: none;
   }
    
