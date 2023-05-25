@@ -26,30 +26,30 @@ describe('Liking a Resto', () => {
     await TestFactories.createLikeButtonPresenterWithRestaurant({ id: 1 });
 
     document.querySelector('#likeButton').dispatchEvent(new Event('click'));
-    const restaurant = await FavoriteRestaurants.getResto(1);
+    const restaurant = await FavoriteRestaurants.getRestaurant(1);
 
     expect(restaurant).toEqual({ id: 1 });
 
-    FavoriteRestaurants.deleteResto(1);
+    FavoriteRestaurants.deleteRestaurant(1);
   });
 
   it('should not add a restaurant again when its already like', async () => {
     await TestFactories.createLikeButtonPresenterWithRestaurant({ id: 1 });
 
-    await FavoriteRestaurants.putRestos({ id: 1 });
+    await FavoriteRestaurants.putRestaurant({ id: 1 });
 
     document.querySelector('#likeButton').dispatchEvent(new Event('click'));
 
-    expect(await FavoriteRestaurants.getAllRestos()).toEqual([{ id: 1 }]);
+    expect(await FavoriteRestaurants.getAllRestaurants()).toEqual([{ id: 1 }]);
 
-    FavoriteRestaurants.deleteResto(1);
+    FavoriteRestaurants.deleteRestaurant(1);
   });
 
-  xit('should not add a restaurant when it has no id', async () => {
+  it('should not add a restaurant when it has no id', async () => {
     await TestFactories.createLikeButtonPresenterWithRestaurant({});
 
     document.querySelector('#likeButton').dispatchEvent(new Event('click'));
 
-    expect(await FavoriteRestaurants.getAllRestaurant()).toEqual([]);
+    expect(await FavoriteRestaurants.getAllRestaurants()).toEqual([]);
   });
 });
