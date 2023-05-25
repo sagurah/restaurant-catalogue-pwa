@@ -1,27 +1,30 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable linebreak-style */
+import FavoriteRestoIdb from '../data/favorite';
 import { createLikeButtonTemplate, createLikedButtonTemplate } from '../views/templates/template-creator';
 
 const LikeButtonInitiator = {
-  async init({ likeButtonContainer, restaurant, favoriteRestaurant }) {
+  async init({ likeButtonContainer, resto }) {
     this._likeButtonContainer = likeButtonContainer;
-    this._restaurant = restaurant;
-    this._favoriteRestaurant = favoriteRestaurant;
-
+    this._resto = resto;
     await this._renderButton();
   },
 
   async _renderButton() {
-    const { id } = this._restaurant;
+    const { id } = this._resto;
 
-    if (await this._isMovieExist(id)) {
+    // console.log(this._resto);
+    if (await this._isRestoExist(id)) {
       this._renderLiked();
     } else {
       this._renderLike();
     }
   },
 
-  async _isMovieExist(id) {
-    const movie = await this._favoriteRestaurant.getRestaurant(id);
-    return !!movie;
+  async _isRestoExist(id) {
+    const resto = await FavoriteRestoIdb.getResto(id);
+    return !!resto;
   },
 
   _renderLike() {
@@ -29,7 +32,7 @@ const LikeButtonInitiator = {
 
     const likeButton = document.querySelector('#likeButton');
     likeButton.addEventListener('click', async () => {
-      await this._favoriteRestaurant.putRestaurant(this._restaurant);
+      await FavoriteRestoIdb.putRestos(this._resto);
       this._renderButton();
     });
   },
@@ -39,7 +42,7 @@ const LikeButtonInitiator = {
 
     const likeButton = document.querySelector('#likeButton');
     likeButton.addEventListener('click', async () => {
-      await this._favoriteRestaurant.deleteRestaurant(this._restaurant.id);
+      await FavoriteRestoIdb.deleteResto(this._resto.id);
       this._renderButton();
     });
   },
